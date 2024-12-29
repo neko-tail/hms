@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    url: jdbc:mysql://localhost:3306/hms?characterEncoding=utf8&useSSL=false
+  data:
+    redis:
+      host: localhost
