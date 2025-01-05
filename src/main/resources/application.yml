@@ -3,9 +3,17 @@ spring:
     name: hms
   profiles:
     active: dev
+  jackson:
+    date-format: "yyyy-MM-dd HH:mm:ss.SSS"
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/**.xml
   global-config:
     db-config:
       id-type: auto
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+  default-produces-media-type: application/json
