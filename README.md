@@ -29,11 +29,22 @@ redis-server
 
 ## 运行
 
-使用 Git 克隆项目，打包并运行，访问 http://localhost:8080/swagger-ui/index.html 查看 API 文档
+使用 Git 克隆项目
 
 ```powershell
 git clone https://github.com/neko-tail/hms.git
 cd hms
+```
+
+可使用 `sql/hms.sql` 初始化数据库
+
+```powershell
+mysql -u root -p < sql/hms.sql
+```
+
+打包并运行，访问 http://localhost:8080/swagger-ui/index.html 查看 API 文档
+
+```powershell
 mvn clean package
 java -jar target/hms.jar
 ```
