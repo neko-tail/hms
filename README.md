@@ -32,7 +32,7 @@ redis-server
 使用 Git 克隆项目，打包并运行，访问 http://localhost:8080/swagger-ui/index.html 查看 API 文档
 
 ```powershell
-git clone git@github.com:neko-tail/hms.git
+git clone https://github.com/neko-tail/hms.git
 cd hms
 mvn clean package
 java -jar target/hms.jar
