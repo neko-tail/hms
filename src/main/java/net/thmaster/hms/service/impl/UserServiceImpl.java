@@ -8,6 +8,7 @@ import net.thmaster.hms.model.dto.UserDTO;
 import net.thmaster.hms.model.entity.User;
 import net.thmaster.hms.model.entity.UserCustom;
 import net.thmaster.hms.model.entity.UserInfo;
+import net.thmaster.hms.model.req.LoginRequest;
 import net.thmaster.hms.model.req.RegisterRequest;
 import net.thmaster.hms.model.req.UserInfoRequest;
 import net.thmaster.hms.model.req.query.UserQueryRequest;
@@ -132,6 +133,17 @@ public class UserServiceImpl implements UserService {
         userCustomRepository.lambdaUpdate()
                 .eq(UserCustom::getUserId, userId)
                 .remove();
+    }
+
+    @Override
+    public UserDTO login(LoginRequest login) {
+        User user = userRepository.lambdaQuery()
+                .eq(User::getUsername, login.username())
+                .eq(User::getPassword, encrypt(login.password()))
+                .oneOpt()
+                .orElseThrow(() -> new IllegalArgumentException("用户名或密码错误"));
+
+        return get(user.getId());
     }
 
     private String encrypt(String pwd) {

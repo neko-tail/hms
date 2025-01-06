@@ -1,6 +1,8 @@
 package net.thmaster.hms.service;
 
+import jakarta.validation.Valid;
 import net.thmaster.hms.model.dto.UserDTO;
+import net.thmaster.hms.model.req.LoginRequest;
 import net.thmaster.hms.model.req.RegisterRequest;
 import net.thmaster.hms.model.req.UserInfoRequest;
 import net.thmaster.hms.model.req.query.UserQueryRequest;
@@ -23,5 +25,7 @@ public interface UserService {
     UserDTO update(Long userId, UserInfoRequest info);
 
     void delete(Long userId);
+
+    UserDTO login(LoginRequest login);
 
 }

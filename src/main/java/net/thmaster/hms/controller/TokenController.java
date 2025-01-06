@@ -8,8 +8,11 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import net.thmaster.hms.assembler.UserModelAssembler;
 import net.thmaster.hms.model.model.TokenModel;
+import net.thmaster.hms.model.model.UserModel;
 import net.thmaster.hms.model.req.LoginRequest;
+import net.thmaster.hms.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +30,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "token", description = "token controller")
 public class TokenController {
 
+    private final UserService userService;
+
+    private final UserModelAssembler userModelAssembler;
+
     @Operation(summary = "用户登录，生成 token", description = "通过用户名和密码进行身份验证，生成 token 返回")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "登录成功",
@@ -34,7 +41,8 @@ public class TokenController {
             @ApiResponse(responseCode = "401", description = "无效的用户名或密码")
     })
     @PostMapping
-    public ResponseEntity<TokenModel> token(@Valid @RequestBody final LoginRequest login) {
-        return null;
+    public ResponseEntity<UserModel> token(@Valid @RequestBody final LoginRequest login) {
+        return ResponseEntity.ok(userModelAssembler.toModel(userService.login(login)));
     }
+
 }
