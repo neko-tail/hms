@@ -9,12 +9,13 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 ```
 
-使用 Scoop 安装基础环境
+使用 Scoop 安装基础环境（openjdk 在 java bucket 下，需要先添加 java）
 
 ```powershell
 scoop install sudo
 sudo scoop install 7zip git openssh --global
-scoop install openjdk maven mariadb redis
+scoop bucket add java
+scoop install java/openjdk maven mariadb redis
 ```
 
 启动 MariaDB 和 Redis 服务（前台运行，各占用一个终端窗口）
