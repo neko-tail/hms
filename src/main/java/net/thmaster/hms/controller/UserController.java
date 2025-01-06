@@ -98,6 +98,6 @@ public class UserController {
         userService.delete(userId);
 
         return ResponseEntity.ok(new VoidModel()
-                .add(linkTo(methodOn(UserController.class).list(null)).withSelfRel()));
+                .add(linkTo(methodOn(UserController.class).list(null)).withRel("users")));
     }
 }

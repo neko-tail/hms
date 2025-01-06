@@ -21,8 +21,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @Component
 public class FoodModelAssembler extends RepresentationModelAssemblerSupport<Food, FoodModel> {
 
-    public FoodModelAssembler(
-    ) {
+    public FoodModelAssembler() {
         super(FoodController.class, FoodModel.class);
     }
 
@@ -62,4 +61,5 @@ public class FoodModelAssembler extends RepresentationModelAssemblerSupport<Food
 
         return collectionModel;
     }
+
 }

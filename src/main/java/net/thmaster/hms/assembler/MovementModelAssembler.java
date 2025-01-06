@@ -20,8 +20,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @Component
 public class MovementModelAssembler extends RepresentationModelAssemblerSupport<Movement, MovementModel> {
 
-    public MovementModelAssembler(
-    ) {
+    public MovementModelAssembler() {
         super(MovementController.class, MovementModel.class);
     }
 

@@ -1,6 +1,6 @@
 package net.thmaster.hms.assembler;
 
-import net.thmaster.hms.controller.UserController;
+import net.thmaster.hms.controller.*;
 import net.thmaster.hms.model.dto.UserDTO;
 import net.thmaster.hms.model.entity.UserInfo;
 import net.thmaster.hms.model.model.UserModel;
@@ -55,7 +55,13 @@ public class UserModelAssembler extends RepresentationModelAssemblerSupport<User
 
         model.add(linkTo(methodOn(UserController.class).get(entity.getId())).withSelfRel())
                 .add(linkTo(methodOn(UserController.class).update(entity.getId(), null)).withRel("update"))
-                .add(linkTo(methodOn(UserController.class).delete(entity.getId())).withRel("delete"));
+                .add(linkTo(methodOn(UserController.class).delete(entity.getId())).withRel("delete"))
+                .add(linkTo(methodOn(MonitorController.class).get(entity.getId())).withRel("monitor"))
+                .add(linkTo(methodOn(UserCustomController.class).get(entity.getId())).withRel("custom"))
+                .add(linkTo(methodOn(WeightController.class).list(entity.getId(), null)).withRel("weights"))
+                .add(linkTo(methodOn(DietController.class).list(entity.getId(), null)).withRel("diets"))
+                .add(linkTo(methodOn(PlanController.class).list(entity.getId(), null)).withRel("plans"))
+        ;
 
         return model;
     }
@@ -71,5 +77,6 @@ public class UserModelAssembler extends RepresentationModelAssemblerSupport<User
 
         return collectionModel;
     }
+
 }
 

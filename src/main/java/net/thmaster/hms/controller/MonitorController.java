@@ -37,6 +37,7 @@ public class MonitorController {
     public ResponseEntity<MonitorModel> get(@PathVariable Long userId) {
         return ResponseEntity.ok(monitorService.get(userId)
                 .add(linkTo(methodOn(MonitorController.class).get(userId)).withSelfRel())
+                .add(linkTo(methodOn(UserController.class).get(userId)).withRel("user"))
         );
     }
 

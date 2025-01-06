@@ -1,6 +1,8 @@
 package net.thmaster.hms.assembler;
 
+import net.thmaster.hms.controller.ExerciseController;
 import net.thmaster.hms.controller.PlanController;
+import net.thmaster.hms.controller.UserController;
 import net.thmaster.hms.model.entity.Plan;
 import net.thmaster.hms.model.model.PlanModel;
 import net.thmaster.hms.model.req.query.PlanQueryRequest;
@@ -51,7 +53,10 @@ public class PlanModelAssembler extends RepresentationModelAssemblerSupport<Plan
                 .add(linkTo(methodOn(PlanController.class).list(userId, null)).withRel("plans"))
                 .add(linkTo(methodOn(PlanController.class).update(userId, entity.getId(), null)).withRel("update"))
                 .add(linkTo(methodOn(PlanController.class).finish(userId, entity.getId())).withRel("finish"))
-                .add(linkTo(methodOn(PlanController.class).delete(userId, entity.getId())).withRel("delete"));
+                .add(linkTo(methodOn(PlanController.class).delete(userId, entity.getId())).withRel("delete"))
+                .add(linkTo(methodOn(ExerciseController.class).list(userId, entity.getId(), null)).withRel("exercises"))
+                .add(linkTo(methodOn(UserController.class).get(userId)).withRel("user"))
+        ;
 
         return model;
     }
@@ -64,7 +69,9 @@ public class PlanModelAssembler extends RepresentationModelAssemblerSupport<Plan
         CollectionModel<PlanModel> collectionModel = super.toCollectionModel(entities);
 
         collectionModel.add(linkTo(methodOn(PlanController.class).list(userId, query)).withSelfRel())
-                .add(linkTo(methodOn(PlanController.class).create(userId, null)).withRel("create"));
+                .add(linkTo(methodOn(PlanController.class).create(userId, null)).withRel("create"))
+                .add(linkTo(methodOn(UserController.class).get(userId)).withRel("user"))
+        ;
 
         return collectionModel;
     }

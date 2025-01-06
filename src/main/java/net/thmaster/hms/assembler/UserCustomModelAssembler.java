@@ -1,5 +1,6 @@
 package net.thmaster.hms.assembler;
 
+import net.thmaster.hms.controller.UserController;
 import net.thmaster.hms.controller.UserCustomController;
 import net.thmaster.hms.model.entity.UserCustom;
 import net.thmaster.hms.model.model.UserCustomModel;
@@ -16,8 +17,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @Component
 public class UserCustomModelAssembler extends RepresentationModelAssemblerSupport<UserCustom, UserCustomModel> {
 
-    public UserCustomModelAssembler(
-    ) {
+    public UserCustomModelAssembler() {
         super(UserCustomController.class, UserCustomModel.class);
     }
 
@@ -33,9 +33,12 @@ public class UserCustomModelAssembler extends RepresentationModelAssemblerSuppor
         UserCustomModel model = instantiateModel(entity);
 
         model.add(linkTo(methodOn(UserCustomController.class).get(entity.getId())).withSelfRel())
-                .add(linkTo(methodOn(UserCustomController.class).update(entity.getId(), null)).withRel("update"));
+                .add(linkTo(methodOn(UserCustomController.class).update(entity.getId(), null)).withRel("update"))
+                .add(linkTo(methodOn(UserController.class).get(entity.getUserId())).withRel("user"))
+        ;
 
         return model;
     }
+
 }
 

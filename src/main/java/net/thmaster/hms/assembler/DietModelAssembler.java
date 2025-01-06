@@ -1,6 +1,8 @@
 package net.thmaster.hms.assembler;
 
 import net.thmaster.hms.controller.DietController;
+import net.thmaster.hms.controller.FoodController;
+import net.thmaster.hms.controller.UserController;
 import net.thmaster.hms.model.dto.DietDTO;
 import net.thmaster.hms.model.model.DietModel;
 import net.thmaster.hms.model.req.query.DietQueryRequest;
@@ -50,7 +52,10 @@ public class DietModelAssembler extends RepresentationModelAssemblerSupport<Diet
                 .add(linkTo(methodOn(DietController.class).list(userId, null)).withRel("diets"))
                 .add(linkTo(methodOn(DietController.class).update(userId, entity.getId(), null))
                         .withRel("update"))
-                .add(linkTo(methodOn(DietController.class).delete(userId, entity.getId())).withRel("delete"));
+                .add(linkTo(methodOn(DietController.class).delete(userId, entity.getId())).withRel("delete"))
+                .add(linkTo(methodOn(FoodController.class).get(entity.getFood().getId())).withRel("food"))
+                .add(linkTo(methodOn(UserController.class).get(entity.getUserId())).withRel("user"))
+        ;
 
         return model;
     }
@@ -64,7 +69,9 @@ public class DietModelAssembler extends RepresentationModelAssemblerSupport<Diet
         CollectionModel<DietModel> collectionModel = super.toCollectionModel(entities);
 
         collectionModel.add(linkTo(methodOn(DietController.class).list(userId, query)).withSelfRel())
-                .add(linkTo(methodOn(DietController.class).create(userId, null)).withRel("create"));
+                .add(linkTo(methodOn(DietController.class).create(userId, null)).withRel("create"))
+                .add(linkTo(methodOn(UserController.class).get(userId)).withRel("user"))
+        ;
 
         return collectionModel;
     }

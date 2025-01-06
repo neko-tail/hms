@@ -110,7 +110,7 @@ public class ExerciseController {
     ) {
         exerciseService.delete(userId, planId, exerciseId);
         return ResponseEntity.ok(new VoidModel()
-                .add(linkTo(methodOn(ExerciseController.class).list(userId, planId, null)).withSelfRel())
+                .add(linkTo(methodOn(ExerciseController.class).list(userId, planId, null)).withRel("exercises"))
         );
     }
 

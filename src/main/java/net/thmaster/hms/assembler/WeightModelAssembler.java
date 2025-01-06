@@ -1,5 +1,6 @@
 package net.thmaster.hms.assembler;
 
+import net.thmaster.hms.controller.UserController;
 import net.thmaster.hms.controller.WeightController;
 import net.thmaster.hms.model.entity.Weight;
 import net.thmaster.hms.model.model.WeightModel;
@@ -39,7 +40,9 @@ public class WeightModelAssembler extends RepresentationModelAssemblerSupport<We
         model.add(linkTo(methodOn(WeightController.class).get(userId, entity.getId())).withSelfRel())
                 .add(linkTo(methodOn(WeightController.class).list(userId, null)).withRel("weights"))
                 .add(linkTo(methodOn(WeightController.class).update(userId, entity.getId(), null)).withRel("update"))
-                .add(linkTo(methodOn(WeightController.class).delete(userId, entity.getId())).withRel("delete"));
+                .add(linkTo(methodOn(WeightController.class).delete(userId, entity.getId())).withRel("delete"))
+                .add(linkTo(methodOn(UserController.class).get(userId)).withRel("user"))
+        ;
 
         return model;
     }
@@ -52,7 +55,9 @@ public class WeightModelAssembler extends RepresentationModelAssemblerSupport<We
         CollectionModel<WeightModel> collectionModel = super.toCollectionModel(entities);
 
         collectionModel.add(linkTo(methodOn(WeightController.class).list(userId, query)).withSelfRel())
-                .add(linkTo(methodOn(WeightController.class).create(userId, null)).withRel("create"));
+                .add(linkTo(methodOn(WeightController.class).create(userId, null)).withRel("create"))
+                .add(linkTo(methodOn(UserController.class).get(userId)).withRel("user"))
+        ;
 
         return collectionModel;
     }

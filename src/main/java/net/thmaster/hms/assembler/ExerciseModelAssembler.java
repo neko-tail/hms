@@ -1,10 +1,11 @@
 package net.thmaster.hms.assembler;
 
 import net.thmaster.hms.controller.ExerciseController;
+import net.thmaster.hms.controller.PlanController;
+import net.thmaster.hms.controller.UserController;
 import net.thmaster.hms.model.dto.ExerciseDTO;
 import net.thmaster.hms.model.model.ExerciseModel;
 import net.thmaster.hms.model.req.query.ExerciseQueryRequest;
-import net.thmaster.hms.repository.PlanRepository;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.lang.NonNull;
@@ -19,13 +20,8 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @Component
 public class ExerciseModelAssembler extends RepresentationModelAssemblerSupport<ExerciseDTO, ExerciseModel> {
 
-    private final PlanRepository planRepository;
-
-    public ExerciseModelAssembler(
-            PlanRepository planRepository
-    ) {
+    public ExerciseModelAssembler() {
         super(ExerciseController.class, ExerciseModel.class);
-        this.planRepository = planRepository;
     }
 
     @NonNull
@@ -54,7 +50,10 @@ public class ExerciseModelAssembler extends RepresentationModelAssemblerSupport<
                 .add(linkTo(methodOn(ExerciseController.class).update(userId, planId, exerciseId, null))
                         .withRel("update"))
                 .add(linkTo(methodOn(ExerciseController.class).delete(userId, planId, exerciseId))
-                        .withRel("delete"));
+                        .withRel("delete"))
+                .add(linkTo(methodOn(PlanController.class).get(userId, planId)).withRel("plan"))
+                .add(linkTo(methodOn(UserController.class).get(userId)).withRel("user"))
+        ;
 
         return model;
     }
@@ -69,7 +68,10 @@ public class ExerciseModelAssembler extends RepresentationModelAssemblerSupport<
         CollectionModel<ExerciseModel> collectionModel = super.toCollectionModel(entities);
 
         collectionModel.add(linkTo(methodOn(ExerciseController.class).list(userId, planId, query)).withSelfRel())
-                .add(linkTo(methodOn(ExerciseController.class).create(userId, planId, null)).withRel("create"));
+                .add(linkTo(methodOn(ExerciseController.class).create(userId, planId, null)).withRel("create"))
+                .add(linkTo(methodOn(PlanController.class).get(userId, planId)).withRel("plan"))
+                .add(linkTo(methodOn(UserController.class).get(userId)).withRel("user"))
+        ;
 
         return collectionModel;
     }
