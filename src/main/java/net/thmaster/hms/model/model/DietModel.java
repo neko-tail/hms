@@ -20,6 +20,11 @@ import java.time.LocalDateTime;
 @Schema(description = "饮食记录资源模型")
 public class DietModel extends RepresentationModel<DietModel> {
 
+    private Long id;
+
+    @Schema(description = "用户 ID")
+    private Long userId;
+
     @Schema(description = "饮食类型名称")
     private String typeName;
 

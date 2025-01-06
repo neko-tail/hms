@@ -27,6 +27,7 @@ public class UserModelAssembler extends RepresentationModelAssemblerSupport<User
     @Override
     protected UserModel instantiateModel(@NonNull UserDTO entity) {
         UserModel userModel = new UserModel();
+        userModel.setId(entity.getId());
         userModel.setUsername(entity.getUsername());
         userModel.setEmail(entity.getEmail());
         userModel.setPhoneNumber(entity.getPhoneNumber());

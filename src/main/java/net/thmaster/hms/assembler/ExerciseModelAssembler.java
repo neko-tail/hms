@@ -27,7 +27,12 @@ public class ExerciseModelAssembler extends RepresentationModelAssemblerSupport<
     @NonNull
     @Override
     protected ExerciseModel instantiateModel(@NonNull ExerciseDTO entity) {
-        return new ExerciseModel(entity.getMovement().getName(), entity.getCount());
+        return new ExerciseModel(entity.getId(),
+                entity.getUserId(),
+                entity.getPlanId(),
+                entity.getMovement().getName(),
+                entity.getCount()
+        );
     }
 
     @NonNull

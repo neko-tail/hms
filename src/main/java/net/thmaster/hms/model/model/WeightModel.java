@@ -19,9 +19,15 @@ import java.time.LocalDate;
 @Schema(description = "体重记录资源模型")
 public class WeightModel extends RepresentationModel<WeightModel> {
 
+    private Long id;
+
+    @Schema(description = "用户 ID ")
+    private Long userId;
+
     @Schema(description = "体重")
     private Double weight;
 
     @Schema(description = "日期")
     private LocalDate date;
+
 }

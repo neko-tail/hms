@@ -27,7 +27,12 @@ public class MovementModelAssembler extends RepresentationModelAssemblerSupport<
     @NonNull
     @Override
     protected MovementModel instantiateModel(@NonNull Movement entity) {
-        return new MovementModel(entity.getName(), entity.getDesc(), entity.getCalorie(), entity.getImg());
+        return new MovementModel(entity.getId(),
+                entity.getName(),
+                entity.getDesc(),
+                entity.getCalorie(),
+                entity.getImg()
+        );
     }
 
     @NonNull

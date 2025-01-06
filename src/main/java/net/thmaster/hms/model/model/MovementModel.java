@@ -17,6 +17,8 @@ import org.springframework.hateoas.RepresentationModel;
 @Schema(description = "运动资源模型")
 public class MovementModel extends RepresentationModel<MovementModel> {
 
+    private Long id;
+
     @Schema(description = "名称")
     private String name;
 

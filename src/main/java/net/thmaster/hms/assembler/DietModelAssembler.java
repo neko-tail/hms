@@ -28,6 +28,8 @@ public class DietModelAssembler extends RepresentationModelAssemblerSupport<Diet
     @Override
     protected DietModel instantiateModel(@NonNull DietDTO dto) {
         return new DietModel(
+                dto.getId(),
+                dto.getUserId(),
                 dto.getType().getName(),
                 dto.getCount(),
                 dto.getTime(),

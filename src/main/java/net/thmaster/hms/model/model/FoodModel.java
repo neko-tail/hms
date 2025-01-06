@@ -17,6 +17,8 @@ import org.springframework.hateoas.RepresentationModel;
 @Schema(description = "食物资源模型")
 public class FoodModel extends RepresentationModel<FoodModel> {
 
+    private Long id;
+
     @Schema(description = "名称")
     private String name;
 
@@ -28,4 +30,5 @@ public class FoodModel extends RepresentationModel<FoodModel> {
 
     @Schema(description = "图片路径")
     private String img;
+
 }

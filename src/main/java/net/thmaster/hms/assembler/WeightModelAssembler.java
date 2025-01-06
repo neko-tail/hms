@@ -27,7 +27,7 @@ public class WeightModelAssembler extends RepresentationModelAssemblerSupport<We
     @NonNull
     @Override
     protected WeightModel instantiateModel(@NonNull Weight entity) {
-        return new WeightModel(entity.getWeight(), entity.getDate());
+        return new WeightModel(entity.getId(), entity.getUserId(), entity.getWeight(), entity.getDate());
     }
 
     @NonNull

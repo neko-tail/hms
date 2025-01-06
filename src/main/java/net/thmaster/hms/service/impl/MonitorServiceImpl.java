@@ -72,6 +72,7 @@ public class MonitorServiceImpl implements MonitorService {
         }
 
         return MonitorModel.builder()
+                .userId(userId)
                 .initWeight(initWeight.orElse(null))
                 .targetWeight(targetWeight.orElse(null))
                 .currentWeight(currentWeight.orElse(null))

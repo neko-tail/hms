@@ -17,6 +17,8 @@ import org.springframework.hateoas.RepresentationModel;
 @Schema(description = "用户状态监控资源模型")
 public class MonitorModel extends RepresentationModel<MonitorModel> {
 
+    private Long userId;
+
     @Schema(description = "初始体重")
     private Double initWeight;
 

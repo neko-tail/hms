@@ -24,7 +24,12 @@ public class UserCustomModelAssembler extends RepresentationModelAssemblerSuppor
     @NonNull
     @Override
     protected UserCustomModel instantiateModel(@NonNull UserCustom entity) {
-        return new UserCustomModel(entity.getCalorieLimit(), entity.getInitWeight(), entity.getTargetWeight());
+        return new UserCustomModel(
+                entity.getUserId(),
+                entity.getCalorieLimit(),
+                entity.getInitWeight(),
+                entity.getTargetWeight()
+        );
     }
 
     @NonNull

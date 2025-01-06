@@ -28,7 +28,10 @@ public class PlanModelAssembler extends RepresentationModelAssemblerSupport<Plan
     @NonNull
     @Override
     protected PlanModel instantiateModel(@NonNull Plan entity) {
-        return new PlanModel(entity.getName(),
+        return new PlanModel(
+                entity.getId(),
+                entity.getUserId(),
+                entity.getName(),
                 entity.getDesc(),
                 entity.getCreateTime(),
                 entity.getFinTime(),

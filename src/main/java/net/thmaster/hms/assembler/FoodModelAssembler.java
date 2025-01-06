@@ -28,7 +28,7 @@ public class FoodModelAssembler extends RepresentationModelAssemblerSupport<Food
     @NonNull
     @Override
     protected FoodModel instantiateModel(Food entity) {
-        return new FoodModel(entity.getName(), entity.getDesc(), entity.getCalorie(), entity.getImg());
+        return new FoodModel(entity.getId(), entity.getName(), entity.getDesc(), entity.getCalorie(), entity.getImg());
     }
 
     @NonNull

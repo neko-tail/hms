@@ -17,6 +17,8 @@ import org.springframework.hateoas.RepresentationModel;
 @Schema(description = "用户资源模型")
 public class UserModel extends RepresentationModel<UserModel> {
 
+    private Long id;
+
     @Schema(description = "用户名")
     private String username;
 

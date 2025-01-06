@@ -19,6 +19,11 @@ import java.time.LocalDateTime;
 @Schema(description = "训练计划资源模型")
 public class PlanModel extends RepresentationModel<PlanModel> {
 
+    private Long id;
+
+    @Schema(description = "用户 ID")
+    private Long userId;
+
     @Schema(description = "计划名称")
     private String name;
 
@@ -33,4 +38,5 @@ public class PlanModel extends RepresentationModel<PlanModel> {
 
     @Schema(description = "已完成")
     private Boolean fin;
+
 }
