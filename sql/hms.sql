@@ -25,6 +25,21 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/ `hms` /*!40100 DEFAULT CHARACTER SET ut
 USE `hms`;
 
 --
+-- Table structure for table `blog`
+--
+
+DROP TABLE IF EXISTS `blog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `blog` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL COMMENT '标题',
+  `author` varchar(255) NOT NULL COMMENT '作者',
+  `content` text DEFAULT NULL COMMENT '内容',
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='博客';
+/*!40101 SET character_set_client = @saved_cs_client */;
+--
 -- Table structure for table `diet`
 --
 
