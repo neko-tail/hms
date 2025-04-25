@@ -13,6 +13,9 @@ import java.time.LocalDateTime;
 @Schema(description = "饮食记录查询请求对象")
 public record DietQueryRequest(
 
+        @Schema(description = "饮食类型名称", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+        String typeName,
+
         @Schema(description = "食物名称，模糊查询", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
         String foodName,
 

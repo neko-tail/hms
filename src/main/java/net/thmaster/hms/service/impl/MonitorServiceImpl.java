@@ -42,7 +42,7 @@ public class MonitorServiceImpl implements MonitorService {
         LocalDate today = LocalDate.now();
 
         // 今日摄入
-        DietQueryRequest dietQuery = new DietQueryRequest(null, today, null, null);
+        DietQueryRequest dietQuery = new DietQueryRequest(null, null, today, null, null);
         Double intakesCalories = dietService.list(userId, dietQuery).stream()
                 .map(x -> x.getFood().getCalorie() * x.getCount())
                 .reduce(Double::sum).orElse(0.0);

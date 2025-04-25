@@ -3,6 +3,7 @@ package net.thmaster.hms.service.impl;
 import com.github.yulichang.toolkit.JoinWrappers;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.thmaster.hms.enums.DietType;
 import net.thmaster.hms.model.dto.DietDTO;
 import net.thmaster.hms.model.entity.Diet;
 import net.thmaster.hms.model.entity.Food;
@@ -11,6 +12,7 @@ import net.thmaster.hms.model.req.query.DietQueryRequest;
 import net.thmaster.hms.repository.DietRepository;
 import net.thmaster.hms.repository.FoodRepository;
 import net.thmaster.hms.service.DietService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
@@ -68,6 +70,8 @@ public class DietServiceImpl implements DietService {
                 .selectAssociation(Food.class, DietDTO::getFood)
                 .innerJoin(Food.class, Food::getId, Diet::getFoodId)
                 .eq(Diet::getUserId, userId)
+                .like(StringUtils.isNotEmpty(query.typeName()), Diet::getType,
+                        DietType.getByName(query.typeName()).map(DietType::getCode).orElse(-1))
                 .func(query != null, w -> {
                             w.like(query.foodName() != null, Food::getName, query.foodName());
                             if (query.day() != null) {
