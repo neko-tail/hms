@@ -28,6 +28,7 @@ public class BlogServiceImpl implements BlogService {
         blog.setTitle(info.title());
         blog.setAuthor(info.author());
         blog.setContent(info.content());
+        blog.setImgUrl(info.imgUrl());
 
         blogRepository.save(blog);
 
@@ -54,6 +55,7 @@ public class BlogServiceImpl implements BlogService {
                 .set(info.title() != null, Blog::getTitle, info.title())
                 .set(info.author() != null, Blog::getAuthor, info.author())
                 .set(info.content() != null, Blog::getContent, info.content())
+                .set(info.imgUrl() != null, Blog::getImgUrl, info.imgUrl())
                 .eq(Blog::getId, blogId)
                 .update();
 

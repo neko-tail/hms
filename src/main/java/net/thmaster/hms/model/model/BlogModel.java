@@ -28,4 +28,7 @@ public class BlogModel extends RepresentationModel<BlogModel> {
     @Schema(description = "内容")
     private String content;
 
+    @Schema(description = "图片 url")
+    private String imgUrl;
+
 }

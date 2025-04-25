@@ -38,4 +38,8 @@ public class Blog {
     @TableField("`content`")
     private String content;
 
+    @Schema(description = "图片 url")
+    @TableField("img_url")
+    private String imgUrl;
+
 }

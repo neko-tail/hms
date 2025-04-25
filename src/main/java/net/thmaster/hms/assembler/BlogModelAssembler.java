@@ -28,7 +28,7 @@ public class BlogModelAssembler extends RepresentationModelAssemblerSupport<Blog
     @NonNull
     @Override
     protected BlogModel instantiateModel(Blog entity) {
-        return new BlogModel(entity.getId(), entity.getTitle(), entity.getAuthor(), entity.getContent());
+        return new BlogModel(entity.getId(), entity.getTitle(), entity.getAuthor(), entity.getContent(), entity.getImgUrl());
     }
 
     @NonNull

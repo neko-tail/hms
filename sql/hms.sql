@@ -36,6 +36,7 @@ CREATE TABLE `blog` (
   `title` varchar(255) NOT NULL COMMENT '标题',
   `author` varchar(255) NOT NULL COMMENT '作者',
   `content` text DEFAULT NULL COMMENT '内容',
+  `img_url` varchar(255) DEFAULT NULL COMMENT '图片 url',
 PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='博客';
 /*!40101 SET character_set_client = @saved_cs_client */;

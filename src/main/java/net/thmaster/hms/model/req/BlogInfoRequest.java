@@ -16,7 +16,10 @@ public record BlogInfoRequest(
 
         @NotNull
         @Schema(description = "内容")
-        String content
+        String content,
+
+        @Schema(description = "图片 url")
+        String imgUrl
 
 ) {
 
