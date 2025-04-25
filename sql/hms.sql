@@ -40,6 +40,23 @@ CREATE TABLE `blog` (
 PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='博客';
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `comment`
+--
+
+DROP TABLE IF EXISTS `comment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `comment` (
+                        `id` bigint(20) NOT NULL AUTO_INCREMENT,
+                        `blog_id` bigint(20) NOT NULL COMMENT '博客 ID',
+                        `user_id` bigint(20) NOT NULL COMMENT '用户 ID',
+                        `content` text DEFAULT NULL COMMENT '内容',
+                        PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='评论';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
 --
 -- Table structure for table `diet`
 --
