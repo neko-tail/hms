@@ -37,7 +37,7 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public Blog get(Long blogId) {
-        return blogRepository.getOptById(blogId).orElseThrow(() -> new ResourceNotFoundException("食物不存在"));
+        return blogRepository.getOptById(blogId).orElseThrow(() -> new ResourceNotFoundException("博客不存在"));
     }
 
     @Override

@@ -13,12 +13,12 @@ public interface BlogService {
 
     Blog save(BlogInfoRequest info);
 
-    Blog get(Long foodId);
+    Blog get(Long blogId);
 
     List<Blog> list(BlogQueryRequest query);
 
-    Blog update(Long foodId, BlogInfoRequest info);
+    Blog update(Long blogId, BlogInfoRequest info);
 
-    void delete(Long foodId);
+    void delete(Long blogId);
 
 }
