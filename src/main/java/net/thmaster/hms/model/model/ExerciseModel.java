@@ -22,12 +22,12 @@ public class ExerciseModel extends RepresentationModel<ExerciseModel> {
     @Schema(description = "用户 ID")
     private Long userId;
 
-    @Schema(description = "计划 ID")
-    private Long planId;
-
     @Schema(description = "运动名称")
     private String movementName;
 
     @Schema(description = "次数")
-    private Integer count;
+    private String count;
+
+    @Schema(description = "重量")
+    private String weight;
 }

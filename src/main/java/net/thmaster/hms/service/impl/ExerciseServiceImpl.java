@@ -30,32 +30,34 @@ public class ExerciseServiceImpl implements ExerciseService {
     private final MovementRepository movementRepository;
 
     @Override
-    public ExerciseDTO save(Long userId, Long planId, ExerciseInfoRequest info) {
+    public ExerciseDTO save(Long userId, ExerciseInfoRequest info) {
         Exercise entity = new Exercise();
-        entity.setPlanId(planId);
+        entity.setUserId(userId);
         entity.setMovementId(info.movementId());
         entity.setCount(info.count());
+        entity.setWeight(info.weight());
 
         exerciseRepository.save(entity);
 
-        return get(userId, planId, entity.getId());
+        return get(userId, entity.getId());
     }
 
     @Override
-    public ExerciseDTO get(Long userId, Long planId, Long exerciseId) {
+    public ExerciseDTO get(Long userId, Long exerciseId) {
         return exerciseRepository.getOptById(exerciseId)
-                .filter(x -> Objects.equals(x.getPlanId(), planId))
+                .filter(x -> Objects.equals(x.getUserId(), userId))
                 .map(exercise -> ExerciseDTO.builder()
                         .id(exercise.getId())
                         .userId(userId)
                         .movement(movementRepository.getById(exercise.getMovementId()))
                         .count(exercise.getCount())
+                        .weight(exercise.getWeight())
                         .build()
                 ).orElseThrow(() -> new ResourceNotFoundException("运动不存在"));
     }
 
     @Override
-    public List<ExerciseDTO> list(Long userId, Long planId, ExerciseQueryRequest query) {
+    public List<ExerciseDTO> list(Long userId, ExerciseQueryRequest query) {
         return exerciseRepository.selectJoinList(ExerciseDTO.class,
                         JoinWrappers.lambda(Exercise.class)
                                 .selectAll()
@@ -63,26 +65,27 @@ public class ExerciseServiceImpl implements ExerciseService {
                                 .leftJoin(Movement.class, Movement::getId, Exercise::getMovementId)
                                 .func(query != null, w -> w
                                         .like(query.movementName() != null, Movement::getName, query.movementName())
-                                ).eq(Exercise::getPlanId, planId)
+                                ).eq(Exercise::getUserId, userId)
                 ).stream().peek(x -> x.setUserId(userId))
                 .toList();
     }
 
     @Override
-    public ExerciseDTO update(Long userId, Long planId, Long exerciseId, ExerciseInfoRequest info) {
+    public ExerciseDTO update(Long userId, Long exerciseId, ExerciseInfoRequest info) {
         exerciseRepository.lambdaUpdate()
                 .set(info.movementId() != null, Exercise::getMovementId, info.movementId())
                 .set(info.count() != null, Exercise::getCount, info.count())
+                .set(info.weight() != null, Exercise::getWeight, info.weight())
                 .eq(Exercise::getId, exerciseId)
-                .eq(Exercise::getPlanId, planId)
+                .eq(Exercise::getUserId, userId)
                 .update();
 
-        return get(userId, planId, exerciseId);
+        return get(userId, exerciseId);
     }
 
     @Override
-    public void delete(Long userId, Long planId, Long exerciseId) {
-        ExerciseDTO dto = get(userId, planId, exerciseId);
+    public void delete(Long userId, Long exerciseId) {
+        ExerciseDTO dto = get(userId, exerciseId);
         exerciseRepository.removeById(dto.getId());
     }
 

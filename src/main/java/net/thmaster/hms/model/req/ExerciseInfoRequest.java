@@ -13,7 +13,11 @@ public record ExerciseInfoRequest(
 
         @NotNull
         @Schema(description = "次数")
-        Integer count
+        String count,
+
+        @NotNull
+        @Schema(description = "重量")
+        String weight
 ) {
 
 }

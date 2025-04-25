@@ -1,7 +1,6 @@
 package net.thmaster.hms.assembler;
 
 import net.thmaster.hms.controller.ExerciseController;
-import net.thmaster.hms.controller.PlanController;
 import net.thmaster.hms.controller.UserController;
 import net.thmaster.hms.model.dto.ExerciseDTO;
 import net.thmaster.hms.model.model.ExerciseModel;
@@ -29,9 +28,9 @@ public class ExerciseModelAssembler extends RepresentationModelAssemblerSupport<
     protected ExerciseModel instantiateModel(@NonNull ExerciseDTO entity) {
         return new ExerciseModel(entity.getId(),
                 entity.getUserId(),
-                entity.getPlanId(),
                 entity.getMovement().getName(),
-                entity.getCount()
+                entity.getCount(),
+                entity.getWeight()
         );
     }
 
@@ -47,16 +46,14 @@ public class ExerciseModelAssembler extends RepresentationModelAssemblerSupport<
         ExerciseModel model = instantiateModel(entity);
 
         Long userId = entity.getUserId();
-        Long planId = entity.getPlanId();
         Long exerciseId = entity.getId();
 
-        model.add(linkTo(methodOn(ExerciseController.class).get(userId, planId, exerciseId)).withSelfRel())
-                .add(linkTo(methodOn(ExerciseController.class).list(userId, planId, null)).withRel("exercises"))
-                .add(linkTo(methodOn(ExerciseController.class).update(userId, planId, exerciseId, null))
+        model.add(linkTo(methodOn(ExerciseController.class).get(userId, exerciseId)).withSelfRel())
+                .add(linkTo(methodOn(ExerciseController.class).list(userId, null)).withRel("exercises"))
+                .add(linkTo(methodOn(ExerciseController.class).update(userId, exerciseId, null))
                         .withRel("update"))
-                .add(linkTo(methodOn(ExerciseController.class).delete(userId, planId, exerciseId))
+                .add(linkTo(methodOn(ExerciseController.class).delete(userId, exerciseId))
                         .withRel("delete"))
-                .add(linkTo(methodOn(PlanController.class).get(userId, planId)).withRel("plan"))
                 .add(linkTo(methodOn(UserController.class).get(userId)).withRel("user"))
         ;
 
@@ -67,14 +64,12 @@ public class ExerciseModelAssembler extends RepresentationModelAssemblerSupport<
     public CollectionModel<ExerciseModel> toCollectionModel(
             @NonNull Iterable<? extends ExerciseDTO> entities,
             @NonNull Long userId,
-            @NonNull Long planId,
             ExerciseQueryRequest query
     ) {
         CollectionModel<ExerciseModel> collectionModel = super.toCollectionModel(entities);
 
-        collectionModel.add(linkTo(methodOn(ExerciseController.class).list(userId, planId, query)).withSelfRel())
-                .add(linkTo(methodOn(ExerciseController.class).create(userId, planId, null)).withRel("create"))
-                .add(linkTo(methodOn(PlanController.class).get(userId, planId)).withRel("plan"))
+        collectionModel.add(linkTo(methodOn(ExerciseController.class).list(userId, query)).withSelfRel())
+                .add(linkTo(methodOn(ExerciseController.class).create(userId, null)).withRel("create"))
                 .add(linkTo(methodOn(UserController.class).get(userId)).withRel("user"))
         ;
 

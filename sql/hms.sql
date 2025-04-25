@@ -66,9 +66,10 @@ DROP TABLE IF EXISTS `exercise`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `exercise` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `plan_id` bigint(20) NOT NULL COMMENT '计划 ID',
+  `user_id` bigint(20) NOT NULL COMMENT '用户 ID',
   `movement_id` bigint(20) NOT NULL COMMENT '运动 ID',
-  `count` int(11) NOT NULL DEFAULT 1 COMMENT '次数',
+  `count` varchar(255) NOT NULL DEFAULT '' COMMENT '次数',
+  `weight` varchar(255) NOT NULL DEFAULT '' COMMENT '重量',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='运动记录';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -105,25 +106,6 @@ CREATE TABLE `movement` (
   `img` varchar(255) DEFAULT NULL COMMENT '图片路径',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='运动';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `plan`
---
-
-DROP TABLE IF EXISTS `plan`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `plan` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) NOT NULL COMMENT '用户 ID',
-  `name` varchar(255) NOT NULL DEFAULT '' COMMENT '计划名称',
-  `desc` text NOT NULL DEFAULT '' COMMENT '计划描述',
-  `create_time` datetime(3) NOT NULL DEFAULT current_timestamp(3) COMMENT '创建时间',
-  `fin_time` datetime(3) DEFAULT NULL COMMENT '完成时间',
-  `fin` tinyint(1) NOT NULL DEFAULT 0 COMMENT '已完成',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='训练计划';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

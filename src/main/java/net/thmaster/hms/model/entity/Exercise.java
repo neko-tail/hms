@@ -26,9 +26,9 @@ public class Exercise {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    @Schema(description = "计划 ID")
-    @TableField("plan_id")
-    private Long planId;
+    @Schema(description = "用户 ID")
+    @TableField("user_id")
+    private Long userId;
 
     @Schema(description = "运动 ID")
     @TableField("movement_id")
@@ -36,5 +36,10 @@ public class Exercise {
 
     @Schema(description = "次数")
     @TableField("count")
-    private Integer count;
+    private String count;
+
+    @Schema(description = "重量")
+    @TableField("weight")
+    private String weight;
+
 }

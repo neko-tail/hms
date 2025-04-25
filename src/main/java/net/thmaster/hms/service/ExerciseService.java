@@ -1,7 +1,6 @@
 package net.thmaster.hms.service;
 
 import net.thmaster.hms.model.dto.ExerciseDTO;
-import net.thmaster.hms.model.entity.Plan;
 import net.thmaster.hms.model.req.ExerciseInfoRequest;
 import net.thmaster.hms.model.req.query.ExerciseQueryRequest;
 
@@ -12,14 +11,14 @@ import java.util.List;
  */
 public interface ExerciseService {
 
-    ExerciseDTO save(Long userId, Long planId, ExerciseInfoRequest info);
+    ExerciseDTO save(Long userId, ExerciseInfoRequest info);
 
-    ExerciseDTO get(Long userId, Long planId, Long exerciseId);
+    ExerciseDTO get(Long userId, Long exerciseId);
 
-    List<ExerciseDTO> list(Long userId, Long planId, ExerciseQueryRequest query);
+    List<ExerciseDTO> list(Long userId, ExerciseQueryRequest query);
 
-    ExerciseDTO update(Long userId, Long planId, Long exerciseId, ExerciseInfoRequest info);
+    ExerciseDTO update(Long userId, Long exerciseId, ExerciseInfoRequest info);
 
-    void delete(Long userId, Long planId, Long exerciseId);
+    void delete(Long userId, Long exerciseId);
 
 }

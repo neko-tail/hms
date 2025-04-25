@@ -61,7 +61,6 @@ public class UserModelAssembler extends RepresentationModelAssemblerSupport<User
                 .add(linkTo(methodOn(UserCustomController.class).get(entity.getId())).withRel("custom"))
                 .add(linkTo(methodOn(WeightController.class).list(entity.getId(), null)).withRel("weights"))
                 .add(linkTo(methodOn(DietController.class).list(entity.getId(), null)).withRel("diets"))
-                .add(linkTo(methodOn(PlanController.class).list(entity.getId(), null)).withRel("plans"))
         ;
 
         return model;

@@ -6,7 +6,6 @@ import net.thmaster.hms.model.entity.UserCustom;
 import net.thmaster.hms.model.entity.Weight;
 import net.thmaster.hms.model.model.MonitorModel;
 import net.thmaster.hms.model.req.query.DietQueryRequest;
-import net.thmaster.hms.model.req.query.PlanQueryRequest;
 import net.thmaster.hms.repository.WeightRepository;
 import net.thmaster.hms.service.*;
 import org.springframework.stereotype.Service;
@@ -25,8 +24,6 @@ public class MonitorServiceImpl implements MonitorService {
     private final UserCustomService userCustomService;
 
     private final DietService dietService;
-
-    private final PlanService planService;
 
     private final ExerciseService exerciseService;
 
@@ -51,12 +48,7 @@ public class MonitorServiceImpl implements MonitorService {
                 .reduce(Double::sum).orElse(0.0);
 
         // 今日消耗
-        PlanQueryRequest planQuery = new PlanQueryRequest(null, null, today, null, null, true);
-        Double burnsCalories = planService.list(userId, planQuery)
-                .stream().map(x -> exerciseService.list(userId, x.getId(), null).stream()
-                        .map(y -> y.getMovement().getCalorie() * y.getCount())
-                        .reduce(Double::sum).orElse(0.0)
-                ).reduce(Double::sum).orElse(0.0);
+        Double burnsCalories = 0.0;
 
         // 剩余热量
         Optional<Double> remainingCalories = calorieLimit.map(x -> x - intakesCalories);

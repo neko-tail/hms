@@ -28,7 +28,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/hms/users/{userId}/plans/{planId}/exercises")
+@RequestMapping("/hms/users/{userId}/exercises")
 @Tag(name = "exercises", description = "运动记录")
 public class ExerciseController {
 
@@ -43,10 +43,9 @@ public class ExerciseController {
     @PostMapping
     public ResponseEntity<ExerciseModel> create(
             @PathVariable("userId") Long userId,
-            @PathVariable("planId") Long planId,
             @Valid @RequestBody final ExerciseInfoRequest info
     ) {
-        return ResponseEntity.ok(exerciseModelAssembler.toModel(exerciseService.save(userId, planId, info)));
+        return ResponseEntity.ok(exerciseModelAssembler.toModel(exerciseService.save(userId, info)));
     }
 
     @Operation(summary = "获取用户训练计划运动记录列表",
@@ -57,12 +56,11 @@ public class ExerciseController {
     @GetMapping
     public ResponseEntity<CollectionModel<ExerciseModel>> list(
             @PathVariable("userId") Long userId,
-            @PathVariable("planId") Long planId,
             final ExerciseQueryRequest query
     ) {
         return ResponseEntity.ok(exerciseModelAssembler.toCollectionModel(
-                exerciseService.list(userId, planId, query),
-                userId, planId, query
+                exerciseService.list(userId, query),
+                userId, query
         ));
     }
 
@@ -74,10 +72,9 @@ public class ExerciseController {
     @GetMapping("/{exerciseId}")
     public ResponseEntity<ExerciseModel> get(
             @PathVariable("userId") Long userId,
-            @PathVariable("planId") Long planId,
             @PathVariable("exerciseId") Long exerciseId
     ) {
-        return ResponseEntity.ok(exerciseModelAssembler.toModel(exerciseService.get(userId, planId, exerciseId)));
+        return ResponseEntity.ok(exerciseModelAssembler.toModel(exerciseService.get(userId, exerciseId)));
     }
 
     @Operation(summary = "更新用户训练计划运动记录", description = "根据运动记录 ID 更新用户训练计划运动记录")
@@ -88,12 +85,11 @@ public class ExerciseController {
     @PutMapping("/{exerciseId}")
     public ResponseEntity<ExerciseModel> update(
             @PathVariable("userId") Long userId,
-            @PathVariable("planId") Long planId,
             @PathVariable("exerciseId") Long exerciseId,
             @Valid @RequestBody final ExerciseInfoRequest info
     ) {
         return ResponseEntity.ok(exerciseModelAssembler.toModel(
-                exerciseService.update(userId, planId, exerciseId, info)
+                exerciseService.update(userId, exerciseId, info)
         ));
     }
 
@@ -105,12 +101,11 @@ public class ExerciseController {
     @DeleteMapping("/{exerciseId}")
     public ResponseEntity<VoidModel> delete(
             @PathVariable("userId") Long userId,
-            @PathVariable("planId") Long planId,
             @PathVariable("exerciseId") Long exerciseId
     ) {
-        exerciseService.delete(userId, planId, exerciseId);
+        exerciseService.delete(userId, exerciseId);
         return ResponseEntity.ok(new VoidModel()
-                .add(linkTo(methodOn(ExerciseController.class).list(userId, planId, null)).withRel("exercises"))
+                .add(linkTo(methodOn(ExerciseController.class).list(userId, null)).withRel("exercises"))
         );
     }
 
